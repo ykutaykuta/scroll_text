@@ -1,3 +1,73 @@
+@font-face { 
+    font-family: 'Exo black italic'; 
+    src: url('/scroll_text/static/font/exo-black-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo black'; 
+    src: url('/scroll_text/static/font/exo-black.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo bold italic'; 
+    src: url('/scroll_text/static/font/exo-bold-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo bold'; 
+    src: url('/scroll_text/static/font/exo-bold.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo demibold italic'; 
+    src: url('/scroll_text/static/font/exo-demibold-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo demibold'; 
+    src: url('/scroll_text/static/font/exo-demibold.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo light italic'; 
+    src: url('/scroll_text/static/font/exo-light-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo light'; 
+    src: url('/scroll_text/static/font/exo-light.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo medium italic'; 
+    src: url('/scroll_text/static/font/exo-medium-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo medium'; 
+    src: url('/scroll_text/static/font/exo-medium.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo regular italic'; 
+    src: url('/scroll_text/static/font/exo-regular-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo regular'; 
+    src: url('/scroll_text/static/font/exo-regular.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo thin italic'; 
+    src: url('/scroll_text/static/font/exo-thin-italic.otf'); 
+}
+
+@font-face { 
+    font-family: 'Exo thin'; 
+    src: url('/scroll_text/static/font/exo-thin.otf'); 
+}
+
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;

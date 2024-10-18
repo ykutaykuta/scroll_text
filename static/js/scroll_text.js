@@ -116,7 +116,6 @@ document.querySelector("#font-select").addEventListener("change", handleFontChan
 function handleFontChange() {
   const fontSelect = document.querySelector("#font-select");
   const value = fontSelect.options[fontSelect.selectedIndex].value;
-  console.log("ykuta", value);
   setCssVariable("font-family", value);
   saveChanges();
 }
@@ -255,10 +254,11 @@ function fetchOptions() {
     document.querySelector("#margin").value = marginNum;
     document.querySelector("#margin-display").textContent = marginNum;
 
+    const font = localStorage.getItem("font");
+    setCssVariable("font-family", font);
+    document.querySelector("#font-select").value = font;
+
     document.querySelector("#speed").value = parseInt(localStorage.getItem("speed"));  
     handleSpeedChange();
-
-    const font = localStorage.getItem("font");
-    document.querySelector("#font-select").value = font;
   }
 }
