@@ -2,6 +2,15 @@ let isPlaying = false;
 let timeoutDelay = 50 - parseInt(document.querySelector("#speed").value);
 let scrollTimeout;
 
+// Initialize the Web Worker
+let scrollWorker = new Worker("/static/js/scrollWorker.js");
+
+scrollWorker.onmessage = function (e) {
+  if (e.data === "scroll") {
+    handleScroll();
+  }
+};
+
 // Get options from localStorage if user already visited site
 fetchOptions();
 
@@ -109,6 +118,10 @@ function handleSpeedChange() {
   const speedInput = document.querySelector("#speed");
   timeoutDelay = 40 - parseInt(speedInput.value);
   document.querySelector("#speed-display").textContent = speedInput.value;
+
+  // Update worker with new timeoutDelay
+  scrollWorker.postMessage({ command: "updateDelay", delay: timeoutDelay });
+
   saveChanges();
 }
 
@@ -142,12 +155,10 @@ window.addEventListener("keydown", function (e) {
 
 document.querySelector(".content").addEventListener("keyup", saveChanges);
 
-function scroll() {
+function handleScroll() {
   const contentEl = document.querySelector(".content");
   if (contentEl.classList.contains("flipy")) {
     window.scrollBy(0, -1);
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(scroll, timeoutDelay);
 
     if (window.scrollY == 0) {
       pause();
@@ -159,8 +170,6 @@ function scroll() {
     }
   } else {
     window.scrollBy(0, 1);
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(scroll, timeoutDelay);
 
     if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
       pause();
@@ -181,14 +190,18 @@ function play() {
   document.querySelector("#triangle").style.setProperty("display", "block");
   document.querySelector("body").classList.add("playing");
   isPlaying = true;
-  scroll();
+
+  // Start worker with current timeoutDelay
+  scrollWorker.postMessage({ command: "start", delay: timeoutDelay });
 }
 
 function pause() {
   document.querySelector("#play").style.setProperty("display", "block");
   document.querySelector("#pause").style.setProperty("display", "none");
 
-  clearTimeout(scrollTimeout);
+  // Stop worker
+  scrollWorker.postMessage({ command: "stop" });
+
   document.querySelector(".content").setAttribute("contenteditable", true);
   document.querySelector("#triangle").style.setProperty("display", "none");
   document.querySelector("body").classList.remove("playing");
