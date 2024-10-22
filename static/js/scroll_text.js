@@ -3,7 +3,7 @@ let timeoutDelay = 50 - parseInt(document.querySelector("#speed").value);
 let scrollTimeout;
 
 // Initialize the Web Worker
-let scrollWorker = new Worker("/static/js/scrollWorker.js");
+let scrollWorker = new Worker("/scroll_text/static/js/scrollWorker.js");
 
 scrollWorker.onmessage = function (e) {
   if (e.data === "scroll") {
